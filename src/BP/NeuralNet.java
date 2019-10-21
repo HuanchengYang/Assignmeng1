@@ -3,8 +3,8 @@ package BP;
 public abstract class NeuralNet {
     public int argNumInputs;
     int argNumHidden;
-    double argLearningRate;
-    double argMomentumTerm;
+    final double argLearningRate = 0.2;
+    final double argMomentumTerm = 0.8;
     double argA;
     double argB;
 }
