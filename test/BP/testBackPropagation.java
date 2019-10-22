@@ -11,6 +11,8 @@ public class testBackPropagation {
     private BackPropagation BP1;
     private double[][] X= {{-1,-1},{-1,1},{1,-1},{1,1}};
     private double[] Y={1,-1,-1,1};
+    private double[][] X2= {{0,0},{0,1},{1,0},{1,1}};
+    private double[] Y2={1,0,0,1};
 
     @BeforeEach
     void runBefore() {
@@ -57,8 +59,15 @@ public class testBackPropagation {
     }
 
     @Test
-    void testTrainModel(){
+    void testTrainModel(){ //Only use with bipolar representation
         int round = BP1.trainModel(X,Y);
+        System.out.println(round);
+
+    }
+
+    @Test
+    void testTrainModel2(){ //Only use with binary representation
+        int round = BP1.trainModel(X2,Y2);
         System.out.println(round);
 
     }

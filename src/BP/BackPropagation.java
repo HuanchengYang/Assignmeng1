@@ -48,9 +48,9 @@ public class BackPropagation extends NeuralNet implements NeuralNetInterface {
 
 
     @Override
-    /**
-     * Return a bipolar sigmoid of the input X
-     * @param x The input
+    /*
+      Return a bipolar sigmoid of the input X
+      @param x The input
      * @return f(x) = 2 / (1+e(-x)) - 1
      */
     public double sigmoid(double x) {
@@ -62,15 +62,20 @@ public class BackPropagation extends NeuralNet implements NeuralNetInterface {
         return 0.5*(1.0-Math.pow(y,2.0));
     }
 
+/*
+      Return a binary sigmoid of the input X
+      @param x The input
+     * @return f(x) = 2 / (1+e(-x)) - 1
+     */
 
-    public double Fx(double x){
-        return 1.0/(1.0+Math.exp(-x));
-    }
-
-    public double devFx(double x) {
-        double dfx = sigmoid(x)*(1-sigmoid(x));
-        return dfx;
-    }
+//    public double sigmoid(double x){
+//        return 1.0/(1.0+Math.exp(-x));
+//    }
+//
+//    public double devsigmoid(double y) {
+//        double dfx = y*(1.0-y);
+//        return dfx;
+//    }
 
 
 
@@ -139,22 +144,13 @@ public class BackPropagation extends NeuralNet implements NeuralNetInterface {
 
     }
 
-//    private double neuronOutput(double[] X,int layer,int index){//index is the output neuron index
-//        double sumS=0;
-//        for (int i=0;i<X.length;i++){
-//            sumS+=X[i]*this.weight[layer][index][i];
-//        }
-//        sumS+=1*this.weight[layer][index][X.length]; //Calculate bias
-//        this.value[layer][index]=sigmoid(sumS);
-//        return sigmoid(sumS);
-//    }
-
     public double outputError(double actualY,double predictY){
         double Oerror = (actualY-predictY)*devsigmoid(predictY);
         this.error[numLayer][argNumOutputs-1]=Oerror;
         return Oerror;
     }
 
+    //Compute all errors in hidden layer neuron
     public void hiddenErrors(){
         for (int i=0;i<argNumHidden;i++){
             hiddenError(value[1][i],i,0);
@@ -230,6 +226,7 @@ public class BackPropagation extends NeuralNet implements NeuralNetInterface {
             totalerror=(error[0]+error[1]+error[2]+error[3])*1/2;
             i=i+1;
             round+=1;
+            System.out.print(round+",");
             System.out.println(totalerror);
             if (round>50000){
                 break;
